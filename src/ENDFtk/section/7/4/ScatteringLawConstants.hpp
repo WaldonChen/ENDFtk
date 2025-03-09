@@ -81,16 +81,32 @@ public:
       switch(1 + NS) {
         case 1: {
           static constexpr std::array< std::ptrdiff_t, 1 > indices = {{0}};
+#ifdef _MSC_VER
+          return ranges::views::counted(indices.data(), 1);
+#else
           return ranges::make_subrange(indices.begin(), indices.end());
+#endif
         } case 2: {
           static constexpr std::array< std::ptrdiff_t, 2 > indices = {{0, 7}};
+#ifdef _MSC_VER
+          return ranges::views::counted(indices.data(), 2);
+#else
           return ranges::make_subrange(indices.begin(), indices.end());
+#endif
         } case 3: {
           static constexpr std::array< std::ptrdiff_t, 3 > indices = {{0, 7, 13}};
+#ifdef _MSC_VER
+          return ranges::views::counted(indices.data(), 3);
+#else
           return ranges::make_subrange(indices.begin(), indices.end());
+#endif
         } case 4: {
           static constexpr std::array< std::ptrdiff_t, 4 > indices = {{0, 7, 13, 19}};
+#ifdef _MSC_VER
+          return ranges::views::counted(indices.data(), 4);
+#else
           return ranges::make_subrange(indices.begin(), indices.end());
+#endif
         } default: {
          #ifdef __GNUC__
           __builtin_unreachable();
